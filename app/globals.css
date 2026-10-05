@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    /* System-font stacks (see app/layout.tsx for why no webfont is
+       fetched). Distinctiveness comes from weight/tracking/scale and
+       the dedicated monospace "label" face, not a custom display font. */
+    --font-display: -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+    --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      sans-serif;
+    --font-label: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  body {
+    @apply bg-paper text-ink;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+}
+
+@layer utilities {
+  /* Signature divider: a perforated "tear-off strip" rule, echoing the
+     perforation between pockets on a foil medicine strip. Used to
+     separate sections on the medicine details page. */
+  .perforated {
+    background-image: repeating-linear-gradient(
+      to right,
+      #c9d1c1 0,
+      #c9d1c1 6px,
+      transparent 6px,
+      transparent 14px
+    );
+    background-size: 14px 1.5px;
+    background-repeat: repeat-x;
+    background-position: left center;
+    height: 1.5px;
+  }
+
+  /* Small blister-pocket dot used as a bullet/marker next to field
+     labels — a quiet nod to the subject without being decorative noise. */
+  .pill-dot::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: currentColor;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
